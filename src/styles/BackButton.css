@@ -1,0 +1,21 @@
+.backbutton {
+  padding: 10px 20px;
+  font-size: 14px;
+  font-weight: 600;
+  border-radius: 12px;
+  border: none;
+  cursor: pointer;
+  background: linear-gradient(135deg, #6b7280, #9ca3af); 
+  color: #fff;
+  transition: 0.3s;
+  text-align: center;
+  margin-top: 20px;
+  width: 100%;
+  }
+  
+  .backbutton:hover {
+    background: linear-gradient(135deg, #4b5563, #6b7280);
+    transform: scale(1.05);
+    box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+  }
+  

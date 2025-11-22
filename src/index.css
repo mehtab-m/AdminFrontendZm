@@ -1,0 +1,13 @@
+ /* global.css */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+/* Apply globally */
+body, html, #root {
+  font-family: 'Inter', sans-serif;  /* Your unique font */
+  font-size: 16px;                  /* Default font size */
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  background-color: #f3f4f6;        /* Optional: project-wide bg */
+}
