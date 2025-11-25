@@ -9,6 +9,7 @@ import Dasboard from './pages/Dashboard'
 import AddCategory from './pages/AddCategory'
 import ProtectedRoute from './components/ProtectedRoute'
 import AddSubCategory from './pages/AddSubCategory'
+import AddProduct from './pages/AddProduct';
 
 
 function App() {
@@ -21,15 +22,22 @@ function App() {
             <Routes>
                 <Route path="/" element={<Login />} />
                 <Route path="/resetPassword" element={<ResetPassword />} />
+
+
+
+
                 <Route path="/admin-dashboard" element={ <ProtectedRoute>
                                                                 <Dasboard />
                                                          </ProtectedRoute>} />
                 <Route path="/add-category" element={<ProtectedRoute>
                                                                 <AddCategory />
                                                          </ProtectedRoute>} />
-                                                         <Route path="/add-subcategory" element={<ProtectedRoute>
+                <Route path="/add-subcategory" element={<ProtectedRoute>
                                                                 <AddSubCategory />
                                                          </ProtectedRoute>} />
+                 <Route path="/add-product" element={<ProtectedRoute>
+                                                                <AddProduct />
+                                                           </ProtectedRoute>} />
                                                         
                                                          
             </Routes>

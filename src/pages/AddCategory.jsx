@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState  ,useEffect} from "react";
 import axios from "axios";
 import "../styles/AddCategory.css"; 
 import CustomButton from "../components/CustomButton";
@@ -9,8 +9,25 @@ import { useNavigate} from "react-router-dom";
 
 export default function AddCategory() {
   const [category, setCategory] = useState("");
-  // const [message, setMessage] = useState("");
+  const [categories, setCategories] = useState([]);
   const navigate = useNavigate(); 
+
+  useEffect(() => {
+    const fetchCategories = async () => {
+        
+      try {
+        const token = localStorage.getItem("jwtToken");
+        const res = await axios.get("http://localhost:5000/api/get_categories", {
+          headers: { Authorization: `Bearer ${token}` }
+        });
+        setCategories(res.data); 
+        console.log(res.data);
+      } catch (err) {
+        toast.error("Failed to load categories");
+      }
+    };
+    fetchCategories();
+  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -30,6 +47,20 @@ export default function AddCategory() {
 
   return (
     <div className="addCategoryPage">
+           <div className="bubbleWrapper">
+        {categories.map((cat) => (
+          <div 
+            key={cat._id} 
+            className="categoryBubble" 
+            style={{ 
+              fontSize: `${Math.floor(Math.random() * 10 + 14)}px`, 
+              padding: `${Math.floor(Math.random() * 10 + 12)}px` 
+            }}
+          >
+            {cat.name}
+          </div>
+        ))}
+      </div>
       <div className="addCategoryCard">
         <h2>Add Main Category</h2>
         <form onSubmit={handleSubmit} className="addCategoryForm">

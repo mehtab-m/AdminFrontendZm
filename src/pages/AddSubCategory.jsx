@@ -4,11 +4,15 @@ import { toast } from "react-toastify";
 import CustomButton from "../components/CustomButton";
 import BackButton from "../components/BackButton";
 import "../styles/AddCategory.css";
+import { addSubCategory } from "../api/addSubCategory";
+import { useNavigate} from "react-router-dom";
+
 
 export default function AddSubCategory() {
-  const [categories, setCategories] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState("");
   const [subCategoryName, setSubCategoryName] = useState("");
+  const navigate = useNavigate(); 
+  const [categories, setCategories] = useState([]);
 
   useEffect(() => {
     const fetchCategories = async () => {
@@ -34,17 +38,14 @@ export default function AddSubCategory() {
     }
 
     try {
-      const token = localStorage.getItem("jwtToken");
-      const res = await axios.post(
-        `http://localhost:5000/api/categories/${selectedCategory}/subcategories`,
-        { name: subCategoryName },
-        { headers: { Authorization: `Bearer ${token}` } }
-      );
+      const res = await addSubCategory(selectedCategory , subCategoryName);
       toast.success(
-        `Subcategory "${res.data.name}" added to ${res.data.parentCategory.name}`
+        `Subcategory "${res.subCategory.name}" added to "${res.parentCategory.name}" successfully!`
       );
       setSubCategoryName("");
+      navigate("/admin-dashboard"); 
     } catch (err) {
+      console.error("Subcategory error:", err.response?.data || err.message);
       toast.error(err.response?.data?.message || "Error adding subcategory");
     }
   };

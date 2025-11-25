@@ -1,0 +1,101 @@
+.addProductPage {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 40px;
+    background-color: #f5f7fa;
+    min-height: 100vh;
+  }
+  
+  .addProductCard {
+    background: #fff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    width: 100%;
+    max-width: 700px;
+  }
+  
+  .addProductCard h2 {
+    margin-bottom: 20px;
+    font-size: 22px;
+    font-weight: 600;
+    color: #333;
+    text-align: center;
+  }
+  
+  .addProductForm {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  .categoryDropdown,
+  .subCategoryDropdown,
+  .addProductForm input[type="text"],
+  .addProductForm input[type="number"],
+  .addProductForm textarea {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 15px;
+    background-color: #f9f9f9;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .categoryDropdown:focus,
+  .subCategoryDropdown:focus,
+  .addProductForm input:focus,
+  .addProductForm textarea:focus {
+    outline: none;
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0,123,255,0.4);
+    background-color: #fff;
+  }
+  
+  .addProductForm label {
+    font-weight: 500;
+    color: #444;
+  }
+  
+  .addProductForm input[type="file"] {
+    padding: 6px;
+  }
+  
+  .addProductForm textarea {
+    min-height: 100px;
+    resize: vertical;
+  }
+  
+  .customFieldRow {
+    display: flex;
+    gap: 10px;
+  }
+  
+  .customFieldRow input {
+    flex: 1;
+  }
+  
+  .addProductForm h4 {
+    margin-top: 20px;
+    font-size: 16px;
+    font-weight: 600;
+    color: #333;
+  }
+  
+  .dashboardBtn {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px 14px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 15px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .dashboardBtn:hover {
+    background-color: #0056b3;
+  }
+  
