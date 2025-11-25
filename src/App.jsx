@@ -5,6 +5,9 @@ import Login from './pages/Login'
 import ResetPassword from './pages/ResetPassword'
 import Dasboard from './pages/Dashboard'
 import AddCategory from './pages/AddCategory'
+import ProtectedRoute from './components/ProtectedRoute'
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 
 function App() {
@@ -13,11 +16,16 @@ function App() {
   return (
     <>
         <Router>
+                <ToastContainer position="top-right" autoClose={5000} />
             <Routes>
                 <Route path="/" element={<Login />} />
                 <Route path="/resetPassword" element={<ResetPassword />} />
-                <Route path="/admin-dashboard" element={<Dasboard />} />
-                <Route path="/add-category" element={<AddCategory />} />
+                <Route path="/admin-dashboard" element={ <ProtectedRoute>
+                                                                <Dasboard />
+                                                         </ProtectedRoute>} />
+                <Route path="/add-category" element={<ProtectedRoute>
+                                                                <AddCategory />
+                                                         </ProtectedRoute>} />
             </Routes>
         </Router>
     </>

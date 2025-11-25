@@ -32,19 +32,24 @@ export default function Login() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("button clicked");
+    console.log("button clicked for login handleSubmit");
+  if (!allValid) {
+    setError("Please complete all validations first");
+    return;
+  }
     setLoading(true);
     setError("");
+
+
+    
     try {
-      // const response = await axios.post("http://localhost:5000/api/admin/login", form);
       const response = await loginAdmin(form);
       const token = response.token;
-      // const token = response.data.token;
       localStorage.setItem("jwtToken", token); 
       navigate("/admin-dashboard"); 
     } catch (err) {
-      setError(err.response?.data?.message || "Login failed");
-    } finally {
+      setError(err.response?.data?.message || err.message || "Login failed");
+    }finally {
       setLoading(false);
     }
   };
@@ -63,6 +68,7 @@ export default function Login() {
             <input
               type="email"
               name="email"
+              required
               value={form.email}
               onChange={handleChange}
               placeholder="admin@gmail.com"
@@ -75,6 +81,7 @@ export default function Login() {
             <label style={styles.label}>Password</label>
             <input
               type="password"
+              required 
               name="password"
               value={form.password}
               onChange={handleChange}
@@ -95,13 +102,14 @@ export default function Login() {
               <input type="checkbox" checked={validations.passwordSpecial} readOnly /> Password must contain special characters
             </label>
           </div>
+          
+        {error && <p style={{ color: "red" }}>{error}</p>}
 
           {/* Login Button */}
-          <button type="submit" style={styles.loginBtn} disabled={!allValid}>
+          <button type="submit" style={styles.loginBtn} >
             Login
           </button>
         </form>
-
         <Link to="/resetPassword" style={styles.forgotBtn}>
           Forget Password?
         </Link>

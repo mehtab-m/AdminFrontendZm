@@ -4,20 +4,27 @@ import "../styles/AddCategory.css";
 import CustomButton from "../components/CustomButton";
 import BackButton from "../components/BackButton";
 import { addCategory } from "../api/addCategory";
+import { toast } from "react-toastify"
+import { useNavigate} from "react-router-dom";
 
 export default function AddCategory() {
   const [category, setCategory] = useState("");
-  const [message, setMessage] = useState("");
+  // const [message, setMessage] = useState("");
+  const navigate = useNavigate(); 
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
      const res = await addCategory(category);
-      setMessage(`Category "${res.data.name}" added successfully!`);
+      // setMessage(`Category "${res.category.name}" added successfully!`);
+      toast.success(`Category "${res.category.name}" added successfully!`);
       setCategory("");
+      navigate("/admin-dashboard"); 
     } catch (err) {
-      setMessage(err.response?.data?.message || "Error adding category");
+      // setMessage(err.response?.category?.message || "Error adding category");
+      toast.error(err.response?.data?.message || "Error adding category");
+
     }
   };
 
@@ -37,7 +44,7 @@ export default function AddCategory() {
           {/* back button */}
         </form>
         <BackButton></BackButton>
-        {message && <p className="message">{message}</p>}
+        {/* {message && <p className="message">{message}</p>} */}
       </div>
     </div>
   );
