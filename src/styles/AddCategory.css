@@ -1,11 +1,12 @@
 .addCategoryPage {
-    min-height: 100dvh;
-    background-color: #f3f4f6;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 20px;
-  }
+  min-height: 100dvh;
+  background-color: #f3f4f6;
+  display: flex;
+  flex-direction: column; /* stack top bubbles, form, bottom bubbles */
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
   
   .addCategoryCard {
     background: #fff;
@@ -89,3 +90,20 @@
     font-size: 14px;
   }
   
+
+
+  
+.bubbleWrapper {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  margin: 15px 0;
+}
+
+.categoryBubble {
+  background: #e0f2fe;
+  color: #0369a1;
+  border-radius: 100%;
+  font-weight: 500;
+}

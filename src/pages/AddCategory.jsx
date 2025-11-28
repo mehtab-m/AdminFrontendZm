@@ -14,14 +14,20 @@ export default function AddCategory() {
 
   useEffect(() => {
     const fetchCategories = async () => {
-        
       try {
         const token = localStorage.getItem("jwtToken");
         const res = await axios.get("http://localhost:5000/api/get_categories", {
           headers: { Authorization: `Bearer ${token}` }
         });
-        setCategories(res.data); 
-        console.log(res.data);
+  
+        // Random style assign once only
+        const styledCats = res.data.map(cat => ({
+          ...cat,
+          fontSize: Math.floor(Math.random() * 10 + 14),
+          padding: Math.floor(Math.random() * 10 + 12)
+        }));
+  
+        setCategories(styledCats);
       } catch (err) {
         toast.error("Failed to load categories");
       }
@@ -47,20 +53,20 @@ export default function AddCategory() {
 
   return (
     <div className="addCategoryPage">
-           <div className="bubbleWrapper">
-        {categories.map((cat) => (
+      {/* bubbles on top */}
+      <div className="bubbleWrapper topBubbles">
+        {categories.slice(0, Math.ceil(categories.length / 2)).map((cat) => (
           <div 
             key={cat._id} 
-            className="categoryBubble" 
-            style={{ 
-              fontSize: `${Math.floor(Math.random() * 10 + 14)}px`, 
-              padding: `${Math.floor(Math.random() * 10 + 12)}px` 
-            }}
+            className="categoryBubble"
+            style={{ fontSize: `${cat.fontSize}px`, padding: `${cat.padding}px` }}
           >
             {cat.name}
           </div>
         ))}
       </div>
+  
+      {/* form */}
       <div className="addCategoryCard">
         <h2>Add Main Category</h2>
         <form onSubmit={handleSubmit} className="addCategoryForm">
@@ -72,11 +78,23 @@ export default function AddCategory() {
             required
           />
           <CustomButton type="submit">Add Category</CustomButton>
-          {/* back button */}
         </form>
-        <BackButton></BackButton>
-        {/* {message && <p className="message">{message}</p>} */}
+        <BackButton />
+      </div>
+  
+      {/* bubbles on bottom */}
+      <div className="bubbleWrapper bottomBubbles">
+        {categories.slice(Math.ceil(categories.length / 2)).map((cat) => (
+          <div 
+            key={cat._id} 
+            className="categoryBubble"
+            style={{ fontSize: `${cat.fontSize}px`, padding: `${cat.padding}px` }}
+          >
+            {cat.name}
+          </div>
+        ))}
       </div>
     </div>
   );
+  
 }

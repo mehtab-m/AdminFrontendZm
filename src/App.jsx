@@ -3,6 +3,8 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import './index.css'
+
+
 import Login from './pages/Login'
 import ResetPassword from './pages/ResetPassword'
 import Dasboard from './pages/Dashboard'
@@ -10,6 +12,7 @@ import AddCategory from './pages/AddCategory'
 import ProtectedRoute from './components/ProtectedRoute'
 import AddSubCategory from './pages/AddSubCategory'
 import AddProduct from './pages/AddProduct';
+import Layout from './components/Layout';
 
 
 function App() {
@@ -19,16 +22,16 @@ function App() {
     <>
         <Router>
                 <ToastContainer position="top-right" autoClose={5000} />
-            <Routes>
+          <Routes>
                 <Route path="/" element={<Login />} />
                 <Route path="/resetPassword" element={<ResetPassword />} />
-
-
-
-
                 <Route path="/admin-dashboard" element={ <ProtectedRoute>
                                                                 <Dasboard />
                                                          </ProtectedRoute>} />
+
+
+            <Route element={<ProtectedRoute><Layout /></ProtectedRoute>}>
+                                                                                              
                 <Route path="/add-category" element={<ProtectedRoute>
                                                                 <AddCategory />
                                                          </ProtectedRoute>} />
@@ -38,9 +41,11 @@ function App() {
                  <Route path="/add-product" element={<ProtectedRoute>
                                                                 <AddProduct />
                                                            </ProtectedRoute>} />
+            </Route>
+          
                                                         
                                                          
-            </Routes>
+          </Routes>
         </Router>
     </>
   ) 
